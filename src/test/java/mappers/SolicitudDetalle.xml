@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SolicitudDetalle">
+    
+    <resultMap solicutd_id="ResultSolicitudDetalle" type="SolicitudDetalle">
+        <result property="id" column="id"/>
+        <result property="solicitud_id" column="solicitud_id"/>
+        <result property="division" column="division"/>
+        <result property="numero_bultos" column="numero_bultos"/>
+        <result property="tipo_empaque" column="tipo_empaque"/>
+        <result property="dimension_largo" column="dimension_largo"/>
+        <result property="dimension_ancho" column="dimension_ancho"/>
+        <result property="dimension_alto" column="dimension_alto"/>
+        <result property="volumen" column="volumen"/>
+        <result property="peso" column="peso"/>
+        <result property="contenedor" column="contenedor"/>
+        <result property="ubicacion" column="ubicacion"/>
+        <result property="ubicacion" column="ubicacion"/>
+        <result property="numero_piezas" column="numero_piezas"/>
+        <result property="estado" column="estado"/>
+    </resultMap>
+    
+    
+    Integer solicitud_id;
+    Integer division;
+    Integer consecu;
+    Integer numeroBultos;
+    Integer tipoEmpaque;
+    Double dim_largo;
+    Double dim_ancho;
+    Double dim_alto;
+    Double volumen;
+    Double peso;
+    String contenedor;
+    String ubicacion;
+    Double numeroPiezas;
+    Integer estado;
+    
+    <insert id="SolicitudDetalleInsert" parameterType="SolicitudDetalle" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO solicituddetalle 
+        (solicitud_id,division,consecutivo,numero_bultos,tipo_empaque,dimension_largo,dimension_ancho,dimension_alto,
+         volumen,peso,contenedor,ubicacion,numero_piezas,estado
+        )
+        VALUES
+        (#{solicitud_id},#{division},#{consecutivo},#{numero_bultos},#{tipo_empaque},#{dimension_largo},
+         #{dimension_ancho},#{dimension_alto},#{volumen},#{peso},#{contenedor},#{ubicacion},#{numero_piezas},#{estado})
+        
+        <selectKey keyProperty="id" resultType="Integer" order="AFTER" > 
+            SELECT MAX(id) FROM  solicituddetalle
+        </selectKey>
+    </insert>
+    
+    <update id="SolicitudDetalleUpdate" parameterType="SolicitudDetalle">
+        UPDATE solicituddetalle 
+        SET nombre = #{solicitud_id},#{division},#{consecutivo},#{numero_bultos},#{tipo_empaque},#{dimension_largo},
+         #{dimension_ancho},#{dimension_alto},#{volumen},#{peso},#{contenedor},#{ubicacion},#{numero_piezas},#{estado}
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="SolicitudDetalleDelete" parameterType="map">
+        DELETE FROM solicituddetalle 
+        WHERE id = #{id}
+    </delete>
+    
+    <select id="SolicitudDetalleWhere" resultMap="ResultSolicitudDetalle">
+        SELECT *
+        FROM solicituddetalle 
+    </select>
+
+</mapper>

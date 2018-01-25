@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Cliente">
+    
+    <resultMap id="ResultCliente" type="Cliente">
+        <result property="id" column="id"/>
+        <result property="nombre" column="nombre"/>
+        <result property="rfc" column="rfc"/>
+        <result property="direccion" column="direccion"/>
+        <result property="nombreContacto" column="nombre_contacto"/>
+    </resultMap>
+    
+    <insert id="ClienteInsert" parameterType="Cliente" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO cliente 
+        (id,nombre,rfc,direccion,nombre_contacto)
+        VALUES
+        (#{id},#{nombre},#{rfc},#{direccion},#{nombreContacto})
+        
+        <selectKey keyProperty="id" resultType="Integer" order="AFTER" > 
+            SELECT MAX(id) FROM cliente 
+        </selectKey>
+    </insert>
+    
+    <update id="ClienteUpdate" parameterType="Cliente">
+        UPDATE cliente 
+        SET nombre = #{nombre}, rfc = #{rfc}, direccion = #{direccion}
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="ClienteDelete" parameterType="map">
+        DELETE FROM cliente 
+        WHERE id = #{id}
+    </delete>
+    
+    <select id="ClienteWhere" resultMap="ResultCliente">
+        SELECT *
+        FROM cliente 
+    </select>
+
+</mapper>

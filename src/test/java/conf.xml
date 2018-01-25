@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+    
+    <typeAliases>
+        <typeAlias alias="Solicitud" type="com.grucas.recintofiscal.model.Solicitud"/>
+        <typeAlias alias="SolicitudDetalle" type="com.grucas.recintofiscal.model.SolicitudDetalle"/>
+        <typeAlias alias="Maniobra" type="com.grucas.recintofiscal.model.Maniobra"/>
+        <typeAlias alias="ManiobraDetalle" type="com.grucas.recintofiscal.model.ManiobraDetalle"/>
+    </typeAliases>
+    
+  <environments default="local">
+      
+    <environment id="local">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/curso"/>
+        <property name="username" value="root"/>
+        <property name="password" value=""/>
+        <property name="poolTimeToWait" value="20000"/>
+        <property name="poolMaximumActiveConnections" value="5"/>
+        <property name="poolMaximumIdleConnections" value="5"/>        
+      </dataSource>
+    </environment>
+    
+  </environments>
+  
+  <mappers>
+    <mapper resource="mappers/Solicitud.xml"/>
+    <mapper resource="mappers/SolicitudDetalle.xml"/>
+    <mapper resource="mappers/Maniobra.xml"/>
+    <mapper resource="mappers/ManiobraDetalle.xml"/>
+  </mappers>
+  
+</configuration>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Solicitud">
+    
+    <resultMap id="ResultSolicitud" type="Solicitud">
+        <result property="id" column="id"/>
+        <result property="division" column="division"/>
+        <result property="tipo_operacion" column="tipo_operacion"/>
+        <result property="orden_cliente" column="orden_cliente"/>
+        <result property="corresponsal" column="corresponsal"/>
+        <result property="linea_transporte" column="linea_transporte"/>
+        <result property="consignatario" column="consignatario"/>
+        <result property="cliente" column="cliente"/>
+        <result property="cantidad_bultos" column="cantidad_bultos"/>
+        <result property="tipo_empaque" column="tipo_empaque"/>
+        <result property="descripcion_mercancia" column="descripcion_mercancia"/>
+        <result property="peso" column="peso"/>
+        <result property="volumen" column="volumen"/>
+        <result property="dgr" column="dgr"/>
+        <result property="numero_imo" column="numero_imo"/>
+        <result property="marcas" column="marcas"/>
+        <result property="puerto_origen" column="puerto_origen"/>
+        <result property="puerto_descarga" column="puerto_descarga"/>
+        <result property="agente_aduanal" column="agente_aduanal"/>
+        <result property="viaje" column="viaje"/>
+        <result property="barco" column="barco"/>
+        <result property="eta" column="eta"/>
+        <result property="bl" column="bl"/>
+        <result property="estado" column="estado"/>
+        <result property="ubicacion" column="ubicacion"/>
+        <result property="observaciones" column="observaciones"/> 
+    </resultMap>
+    
+    <insert id="SolicitudInsert" parameterType="Solicitud" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO cliente 
+        (id,division,tipo_operacion,orden_cliente,corresponsal,linea_transporte,
+         consignatario,cliente,cantidad_bultos,tipo_empaque,descripcion_mercancia,
+         peso,volumen,dgr,numero_imo,marcas,puerto_origen,puerto_descarga,agente_aduanal,
+         viaje,barco,eta,bl,estado,ubicacion,observaciones)
+        VALUES
+        (#{id},#{division},#{tipo_operacion},#{orden_cliente},#{corresponsal},#{linea_transporte},
+         #{consignatario},#{cliente},#{cantidad_bultos},#{tipo_empaque},#{descripcion_mercancia},
+         #{peso},#{volumen},#{dgr},#{numero_imo},#{marcas},#{puerto_origen},#{puerto_descarga},#{agente_aduanal},
+         #{viaje},#{barco},#{eta},#{bl},#{estado},#{ubicacion},#{observaciones})
+   
+        
+        <selectKey keyProperty="id" resultType="Integer" order="AFTER" > 
+            SELECT MAX(id) FROM solicitud 
+        </selectKey>
+    </insert>
+    
+    <update id="SolicitudUpdate" parameterType="Solicitud">
+        UPDATE solicitud 
+        
+        SET division = #{division},tipo_operacion = #{tipo_operacion},orden_cliente = #{orden_cliente},
+            corresponsal = #{corresponsal},linea_transporte = #{linea_transporte},
+            consignatario = #{consignatario},cliente = #{cliente}, cantidad_bultos = #{cantidad_bultos}, 
+            tipo_empaque = #{tipo_empaque},descripcion_mercancia = #{descripcion_mercancia},peso = #{peso},
+            volumen = #{volumen},dgr = #{dgr},numero = #{numero_imo}, marcas = #{marcas},
+            puerto_origen = #{puerto_origen},puerto_descarga = #{puerto_descarga},
+            agente_aduanal = #{agente_aduanal},viaje = #{viaje},barco = #{barco},eta = #{eta},bl = #{bl},
+            estado = #{estado},ubicacion = #{ubicacion},observaciones = #{observaciones}
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="ClienteDelete" parameterType="map">
+        DELETE FROM solicitud 
+        WHERE id = #{id}
+    </delete>
+    
+    <select id="ClienteWhere" resultMap="ResultCliente">
+        SELECT *
+        FROM solicitud
+    </select>
+
+</mapper>
