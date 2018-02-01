@@ -50,4 +50,5 @@ public class Entrada {
   String usuario;
   Date alta;
   Date modifica;
+  
 }
