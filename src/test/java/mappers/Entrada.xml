@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Entrada">
+    
+    <resultMap id="ResultEntrada" type="Entrada">
+        <result property="id" column="id"/>
+        <result property="orden" column="orden"/>
+        <result property="division" column="division"/>
+        <result property="orden_cliente" column="orden_cliente"/>
+        <result property="cliente_grucas" column="cliente_grucas"/>
+        <result property="linea_transporte" column="linea_transporte"/>
+        <result property="consignatario" column="consignatario"/>
+        <result property="cliente" column="cliente"/>
+        <result property="linea_transporte" column="descripcion_producto"/>
+        <result property="peso" column="peso"/>
+        <result property="numero_bultos" column="numero_bultos"/>
+        <result property="numero_piezas" column="numero_piezas"/>
+        <result property="tipo_empaque" column="tipo_empaque"/>
+        <result property="dgr_peligrosa" column="dgr_peligrosa"/>
+        <result property="imo_peligrosa" column="imo_peligrosa"/>
+        <result property="dimension_largo" column="dimension_largo"/>
+        <result property="dimension_ancho" column="dimension_ancho"/>
+        <result property="dimension_alto" column="dimension_alto"/>
+        <result property="volumen" column="volumen"/>
+        <result property="puerto_origen" column="puerto_origen"/>
+        <result property="puerto_descarga" column="puerto_descarga"/>
+        <result property="agente_aduanal" column="agente_aduanal"/>
+        <result property="talon" column="talon"/>
+        <result property="importe" column="importe"/>
+        <result property="viaje" column="viaje"/>
+        <result property="barco" column="barco"/>
+        <result property="eta" column="eta"/>
+        <result property="bill_lading" column="bill_lading"/>
+        <result property="contenedor" column="contenedor"/>
+        <result property="marcas" column="marcas"/>
+        <result property="cierre_bodega" column="cierre_bodega"/>
+        <result property="ubicacion" column="ubicacion"/>
+        <result property="observaciones" column="observaciones"/>
+        <result property="estado" column="estado"/>
+        <result property="usuario" column="usuario"/>
+        <result property="alta" column="alta"/>
+        <result property="modifica" column="modifica"/>
+    </resultMap>
+    
+    
+    
+    
+    <insert id="EntradaInsert" parameterType="Entrada" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO dac_entrada_cd
+        (id,orden,division,orden_cliente,cliente_grucas,linea_transporte,consignatario,cliente,
+        descripcion_producto,peso,numero_bultos,numero_piezas,tipo_empaque,dgr_peligrosa,
+        imo_peligrosa,dimension_largo,dimension_ancho,dimension_alto,volumen,puerto_origen,
+        puerto_descarga,agente_aduanal,talon,importe,viaje,barco,eta,bill_lading,contenedor,
+        marcas,cierre_bodega,ubicacion,observaciones,estado,usuario,alta,modifica)
+        VALUES
+        (#{id},#{orden},#{division},#{orden_cliente},#{cliente_grucas},#{linea_transporte},#{consignatario},
+        #{cliente},#{descripcion_producto},#{peso},#{numero_bultos},#{numero_piezas},#{tipo_empaque},
+        #{dgr_peligrosa},#{imo_peligrosa},#{dimension_largo},#{dimension_ancho},#{dimension_alto},
+        #{volumen},{puerto_origen},{puerto_descarga},{agente_aduanal},{talon},#{importe},
+        #{viaje},{barco},#{eta CURRENT_TIMESTAMP},#{bill_lading},#{contenedor},#{marcas},
+        #{cierre_bodega CURRENT_TIMESTAMP},#{ubicacion},#{observaciones},{estado},
+        #{usuario},#{alta CURRENT_TIMESTAMP},#{modifica CURRENT_TIMESTAMP});
+        
+        <selectKey keyProperty="id" resultType="Integer" order="AFTER" > 
+            SELECT MAX(id) FROM dac_entrada_cd 
+        </selectKey>
+    </insert>
+    
+    
+    <update id="ClienteUpdate" parameterType="Cliente">
+        UPDATE dac_entrada_cd SET
+        id = #{id},orden = #{orden},division = #{division},orden_cliente = #{orden_cliente},
+        cliente_grucas = #{cliente_grucas},linea_transporte = #{linea_transporte},
+        consignatario = #{consignatario},cliente = #{cliente},
+        descripcion_producto = #{descripcion_producto},peso = #{peso},
+        numero_bultos = #{numero_bultos},numero_piezas = #{numero_piezas},
+        tipo_empaque = #{tipo_empaque},dgr_peligrosa = #{dgr_peligrosa},
+        imo_peligrosa = #{imo_peligrosa},dimension_largo = #{dimension_largo},
+        dimension_ancho = #{dimension_ancho},dimension_alto = #{dimension_alto},
+        volumen = #{volumen},puerto_origen = #{puerto_origen},
+        puerto_descarga = #{puerto_descarga},agente_aduanal = #{agente_aduanal},
+        talon = #{talon},importe = #{importe},
+        viaje = #{viaje},barco = #{barco},eta = #{etaCURRENT_TIMESTAMP},
+        bill_lading = #{bill_lading},contenedor = #{contenedor},marcas = #{marcas},
+        cierre_bodega = #{cierre_bodegaCURRENT_TIMESTAMP},ubicacion = #{ubicacion},
+        observaciones = #{observaciones},estado = #{estado},
+        usuario = #{usuario},alta = #{altaCURRENT_TIMESTAMP},modifica = #{modificaCURRENT_TIMESTAMP}
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="EntradaDelete" parameterType="map">
+        DELETE FROM dac_entrada_cd
+        WHERE id = #{id}
+    </delete>
+    
+    <select id="ClienteWhere" resultMap="ResultCliente">
+        SELECT *
+        FROM dac_entrada_cd 
+    </select>
+
+</mapper>
